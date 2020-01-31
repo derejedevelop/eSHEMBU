@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Log In</title>
+</head>
+<style>
+.header {
+  padding: 150px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 10px;
+}
+</style>
+
+<div class="header"  bgColor="Brown">
+
+
+
+
+
+
+    <form  action="login" method="POST">
+        {% csrf_token %}
+        <h1> Log In </h1>
+        <h1>User name:<br></h1>
+        <h1><input type="text" name="username" placeholder="User name"></h1><br>
+        <h1>Password name:</h1><br>
+        <h1><input type="text" name="password" placeholder="Password"></h1><br>
+        <h1><input type="submit" ></h1>
+    </form>
+
+    <nav>
+     <div class="container">
+                 <h1> <a href="/">Home</a></h1>
+     </div>
+    </nav>
+        <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
+</div>
+
+<body>
+
+
+</body>
+</html>

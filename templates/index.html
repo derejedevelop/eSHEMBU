@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>User Account</title>
+</head>
+
+<style>
+.header {
+  padding: 40px;
+  text-align: left;
+  background: #1abc9c;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+}
+.sidebar{
+height:100%;
+width:200px;
+background-color:#fff;
+position:fixed!important;
+z-index:1;
+overflow:auto;
+text-align: Right;
+}
+
+.tab {
+  float: right;
+  background-color: #f1f1f1;
+  width: 50%;
+
+}
+
+.display-topright
+{
+position:absolute;
+right:0;
+top:0
+}
+
+.li
+{
+display: inline;
+}
+
+ul {
+  list-style-type: none;
+  margin: 4;
+  padding: 4;
+}
+
+</style>
+
+<div class="header" >
+
+        <div class="display-topleft">
+            <h1 >WELCOME TO eSHEMBU </h1>
+        </div>
+
+
+
+        <div class="tab">
+            <div class="display-topright">
+                <ul>
+                    <h1 class="li"> <a href="/">Home  </a></h1>
+                    {% if user.is_authenticated %}
+                    <h1 class="li"><a href="authentication/logout">Logout  </a></h1>
+                    {% else %}
+                    <h1 class="li"><a href="authentication/login">Login  </a></h1>
+                    <h1 class="li"><a href="authentication/userAccount">Create Account  </a></h1>
+                    {% endif %}
+
+                 </ul>
+            </div>
+    </div>
+</div>
+
+
+<body>
+    {% for prod in product %}
+        <frame cols="50%,50%">
+            <frame> <img src="{{prod.image1.url}}" width="30%" height="200"> </frame>
+            <frame align="center">
+              {{prod.productName}} {{ prod.description }} <br>
+              Price: {{ prod.price }} <br>
+              Amount In Stock:  {{ prod.amountInStock }} <br>
+              Package Weight:  {{ prod.packageWeight }} <br>
+            </frame>
+
+        </frameset>
+    {% endfor %}
+</body>
+
+
+
+</html>

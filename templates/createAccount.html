@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>User Account</title>
+</head>
+
+<style>
+.header {
+  padding: 30px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 10px;
+}
+</style>
+
+<body  bgColor="Brown">
+<center>
+<div class="header">
+    <h2> Create Account </h2><br><br><br>
+</div>
+
+<form action="userAccount" method="post">
+    {% csrf_token %}
+    First name:
+    <input type="text" name="first_name" placeholder="First Name"><br>
+    Last name:
+    <input type="text" name="last_name" placeholder="Last Name"><br>
+    User name:
+    <input type="text" name="username" placeholder="User Name"><br>
+    Email:
+    <input type="text" name="email" placeholder="Email"><br>
+    Password:
+    <input type="password" name="password1" placeholder="Password"><br>
+    Reenter Password:
+    <input type="password" name="password2" placeholder="Reenter Password"><br>
+    <input type="submit" value="Create Account">
+
+    <h1> <a href="/">Home</a></h1>
+
+</nav>
+</form>
+
+    <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
+
+
+     </center>
+</body>
+
+</html>
