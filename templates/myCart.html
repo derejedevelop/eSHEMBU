@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Main Page</title>
+</head>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.header {
+  padding: 30px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 10px;
+}
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 95%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 30px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 5%;
+  height: 30px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: right;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  background-color: #1abc9c;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+
+}
+
+</style>
+
+<div class="header" class="wrap" bgColor="Brown">
+
+    <h1> My Cart </h1>
+    <nav>
+     <div class="container">
+                 <h1> <a href="/">Home</a></h1>
+     </div>
+    </nav>
+
+
+</div>
+
+</div>
+
+<bodY bgcolor="light blue">
+
+    {% for message in messages %}
+        <h3> {{message}} </h3>
+    {% endfor %}
+
+    {% for items in cartObj %}
+        {% if items.userId == userId %}
+                {% for prod in prodSell %}
+                    {% if prod.id == items.productId %}
+                        <div>
+                        <frame cols="25%,25%,25%,25%">
+                            <frame align="center"><img src="{{prod.image1.url}}" width="240" height="240"></frame>
+                            <frame align="center"><img src="{{prod.image2.url}}" width="240" height="240"></frame>
+                            <frame align="center"><img src="{{prod.image3.url}}" width="240" height="240"></frame>
+                            <frame align="center"><img src="{{prod.image4.url}}" width="240" height="240"></frame>
+                        </frame>
+
+
+                            <h2>Description:  {{ prod.description }}</h2>
+                            <h2>Price: $ {{prod.price }}</h2>
+                            <h2>Amount In Stock:  {{ prod.amountInStock }}</h2>
+                            <h2>Package Weight:  {{ prod.packageWeight }} lb </h2>
+
+                            <button type="submit" name="prodId" value={{prod.id}} data-value="" class="button">CHECK OUT</button>
+                            <form  action="/myCart/deleteFromCart" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="userId"   value="{{items.userId}}">
+                                <button type="submit" name="prodId" value={{prod.id}} class="button">DELETE</button>
+                            </form>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+
+</bodY>
+</html>
+
+
+
