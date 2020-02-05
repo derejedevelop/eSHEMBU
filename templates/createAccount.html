@@ -17,13 +17,12 @@
 }
 </style>
 
-<body  bgColor="Brown">
+
 <center>
 <div class="header">
     <h2> Create Account </h2><br><br><br>
-</div>
 
-<form action="userAccount" method="post">
+    <form action="userAccount" method="post">
     {% csrf_token %}
     First name:
     <input type="text" name="first_name" placeholder="First Name"><br>
@@ -52,6 +51,9 @@
 
 
      </center>
+</div>
+
+<body >
 </body>
 
 </html>

@@ -77,9 +77,15 @@ body{
 <div class="header" class="wrap" bgColor="Brown">
 
     <h1> SHOPPING FOR LESS </h1>
-
-    <h1><a href="/authentication/logout">Logout</a></h1>
-    <h1><a href="/">My Cart</a></h1>
+    <form  action="/authentication/logout" method="POST">
+        {% csrf_token %}
+        <button class="button" type="submit">Logout</a></button>
+    </form>
+    <form  action="/myCart/displayCart" method="POST">
+        {% csrf_token %}
+        <button class="button" name="userId" value={{user.id}}>My Cart</button>
+    </form>
+    <h1><a href="/">Home</a></h1>
 
     <form  action="/product/productSearch" method="post">
         {% csrf_token %}
@@ -110,8 +116,20 @@ body{
                 <h2>Amount In Stock:  {{ prod.amountInStock }}</h2>
                 <h2>Package Weight:  {{ prod.packageWeight }} lb </h2>
                 <h2>product id:  {{ prod.id }} </h2>
-                <button type="submit" class="button">ADD TO CART</button>
+                <h2>user id:  {{ user.id }} </h2>
+
+
+            <form  action="/myCart/addToCart" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="userId" value={{user.id}}>
+                <button type="submit" name="prodId" value={{prod.id}} data-value="" class="button">ADD TO CART</button>
+            </form>
         {% endif %}
+        <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
     {% endfor %}
 </bodY>
 </html>

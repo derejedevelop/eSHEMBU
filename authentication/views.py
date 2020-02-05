@@ -3,13 +3,15 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from product.models import productsForSell
+from authentication.models import userAccount
 
 # Create your views here.
 
 
 def logout(request):
-    auth.logout(request)
-    return redirect("/")
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect("/")
 
 
 def login(request):
@@ -18,15 +20,13 @@ def login(request):
         username = request.POST['username']
         password = request.POST['password']
 
+        userObj = auth.models.User.objects.all()
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            # if username == 'dereje':
-            #     return redirect('addProducts')
-            # else:
             prod = productsForSell.objects.all()
-            return render(request, 'mainPage.html', {'product': prod})
+            return render(request, 'mainPage.html', {'product': prod, 'user': user})
         else:
             messages.info(request, 'Invalid Credentials')
             return redirect('login')
