@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import  settings
 from django.conf.urls.static import static
 
+# Main urls paths are here starting from home page
 urlpatterns = [
 
     path('', include('home.urls')),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('authentication/', include('authentication.urls')),
     path('product/', include('product.urls')),
     path('myCart/', include('myCart.urls')),
+    path('payment/', include('payment.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

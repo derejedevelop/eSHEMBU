@@ -1,104 +1,68 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <title>Main Page</title>
 </head>
 
-<style>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.header {
-  padding: 30px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 10px;
-}
-
-body{
-  background: #f2f2f2;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.search {
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.searchTerm {
-  width: 95%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 30px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-
-.searchButton {
-  width: 5%;
-  height: 30px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: right;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/*Resize the wrap to see the search bar change!*/
-.wrap{
-  width: 30%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.button {
-  background-color: #1abc9c;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 16px;
-
-}
-
-</style>
-
-<div class="header" class="wrap" bgColor="Brown">
+<div class="header">
 
     <h1> SHOPPING FOR LESS </h1>
-    <form  action="/authentication/logout" method="POST">
-        {% csrf_token %}
-        <button class="button" type="submit">Logout</a></button>
-    </form>
-    <form  action="/myCart/displayCart" method="POST">
-        {% csrf_token %}
-        <button class="button" name="userId" value={{user.id}}>My Cart</button>
-    </form>
-    <h1><a href="/">Home</a></h1>
+    <div class="row" >
 
-    <form  action="/product/productSearch" method="post">
-        {% csrf_token %}
-        <div class="search">
-        <input type="text" name="productName"   class="searchTerm" placeholder="What are you looking for?">
-        <button type="submit"  class="searchButton" placeholder="Search">Search</button>
+        <div class="col-sm-4" align="right">
+            <form  action="/" method="POST">
+                {% csrf_token %}
+                <button class="button" type="submit" >Home</a></button>
+            </form>
         </div>
-    </form>
+        <div class="col-sm-4" >
+            <form  action="/myCart/displayCart" method="POST">
+                {% csrf_token %}
+                <button class="button" name="userId" value={{user.id}}>My Cart</button>
+            </form>
+        </div>
+        <div class="col-sm-4" >
+            <form  action="/authentication/logout" method="POST">
+                {% csrf_token %}
+                <button class="button" type="submit">Logout</a></button>
+            </form>
+        </div>
+
+    </div>
+
+          <form action="/product/productSearch" method="post">
+              {% csrf_token %}
+              <div class="row" >
+                  <div class="col-sm-10">
+                    <input class="form-control mr-sm-2" type="search" name="productName" placeholder="What are you looking for?" aria-label="Search">
+                  </div>
+                  <div class="col-sm-2">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                  </div>
+              </div>
+          </form>
+
+
+
+<!--        <form  action="/product/productSearch" method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="search">-->
+<!--            <input type="text" name="productName"   class="searchTerm" placeholder="What are you looking for?">-->
+<!--            <button type="submit"  class="searchButton" placeholder="Search">Search</button>-->
+<!--            </div>-->
+<!--        </form>-->
+    </div>
 </div>
 
 </div>
 
-<bodY bgcolor="light blue">
+<bodY >
 
 
     {% for prod in product %}
@@ -115,13 +79,19 @@ body{
                 <h2>Price: $ {{prod.price }}</h2>
                 <h2>Amount In Stock:  {{ prod.amountInStock }}</h2>
                 <h2>Package Weight:  {{ prod.packageWeight }} lb </h2>
-                <h2>product id:  {{ prod.id }} </h2>
                 <h2>user id:  {{ user.id }} </h2>
 
 
             <form  action="/myCart/addToCart" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="userId" value={{user.id}}>
+                <label for="Qty">Qty:</label>
+                                <select id="Qty" name="Qty">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                </select>
                 <button type="submit" name="prodId" value={{prod.id}} data-value="" class="button">ADD TO CART</button>
             </form>
         {% endif %}

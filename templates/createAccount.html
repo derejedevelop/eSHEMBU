@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <title>User Account</title>
 </head>
 
-<style>
-.header {
-  padding: 30px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 10px;
-}
-</style>
-
-
-<center>
 <div class="header">
-    <h2> Create Account </h2><br><br><br>
+    <div class="row" >
+        <div class="col-sm-4" >
+        </div>
+        <div class="col-sm-4" >
+            <h2> Create Account </h2>
+        </div>
+        <div class="col-sm-4" align="right">
+            <form  action="/" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit" >Home</a></button>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <form action="userAccount" method="post">
+<body >
+
+<form action="userAccount" method="post">
     {% csrf_token %}
-    First name:
-    <input type="text" name="first_name" placeholder="First Name"><br>
-    Last name:
-    <input type="text" name="last_name" placeholder="Last Name"><br>
-    User name:
-    <input type="text" name="username" placeholder="User Name"><br>
-    Email:
-    <input type="text" name="email" placeholder="Email"><br>
-    Password:
-    <input type="password" name="password1" placeholder="Password"><br>
-    Reenter Password:
-    <input type="password" name="password2" placeholder="Reenter Password"><br>
-    <input type="submit" value="Create Account">
-
-    <h1> <a href="/">Home</a></h1>
-
-</nav>
+     <div class="form-group">
+         <div class="col-sm-6" >
+             <label for="usr"><h3>First Name:</h3></label>
+             <input type="text" class="form-control" id="usr" name="first_name" placeholder="First Name" width="50%">
+         </div>
+         <div class="col-sm-6" >
+             <label for="usr"><h3>Last name:</h3></label>
+             <input type="text" class="form-control" id="usr" name="last_name" placeholder="Last Name" >
+         </div>
+         <div class="col-sm-6" >
+             <label for="usr"><h3>User name:</h3></label>
+             <input type="text" class="form-control" id="usr" name="username" placeholder="User Name" >
+         </div>
+         <div class="col-sm-6" >
+             <label for="usr"><h3>Email:</h3></label>
+             <input type="text" class="form-control" id="usr" name="email" placeholder="Email" >
+         </div>
+         <div class="col-sm-6" >
+             <label for="usr"><h3>Password:</h3></label>
+             <input type="text" class="form-control" id="usr" name="password1" placeholder="Password" >
+         </div>
+         <div class="col-sm-6" >
+             <label for="usr"><h3>Reenter Password:</h3></label>
+             <input type="text" class="form-control" id="usr" name="password2" placeholder="Reenter Password" ><br>
+        </div>
+        <div class="col-sm-6" >
+            <button type="submit" class="btn btn-light">Create Account</button>
+        </div>
+     </div>
 </form>
-
     <div>
         {% for message in messages %}
         <h3> {{message}} </h3>
         {% endfor %}
     </div>
-
-
-     </center>
-</div>
-
-<body >
 </body>
 
 </html>

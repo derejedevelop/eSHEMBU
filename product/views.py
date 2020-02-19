@@ -8,6 +8,7 @@ def addProducts(request):
     return render(request, "addProducts.html")
 
 
+# returns searched products
 def productSearch(request):
     prod = productsForSell.objects.all()
     prodName = request.POST['productName']

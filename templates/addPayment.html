@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <title>User Account</title>
+</head>
+
+<div class="header">
+    <div class="row" >
+        <div class="col-sm-4" >
+        </div>
+        <div class="col-sm-4" >
+            <h2> Add Payment </h2>
+        </div>
+        <div class="col-sm-4" align="right">
+            <form  action="/" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit" >Home</a></button>
+        </form>
+        </div>
+    </div>
+
+
+
+    <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
+</div>
+
+<body >
+
+    <form  action="login" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-sm-6" >
+                 <label for="usr"><h3>Full name:</h3></label>
+                 <input type="text" class="form-control" id="usr" name="fullNameOnCard" placeholder="Full name" >
+            </div>
+             <div class="col-sm-6" >
+                 <label for="usr"><h3>Card Number:</h3></label>
+                 <input type="text" class="form-control" id="usr" name="cardNumber" placeholder="Card Number" ><br>
+             </div>
+            <div class="col-sm-6" >
+                 <label for="usr"><h3>CVV Number:</h3></label>
+                 <input type="text" class="form-control" id="usr" name="cvvNumber" placeholder="CVV Number" >
+            </div>
+             <div class="col-sm-6" >
+                 <label for="usr"><h3>Exp Date:</h3></label>
+                 <input type="text" class="form-control" id="usr" name="expDate" placeholder="Exp Date" >
+                 <input type="hidden" name="ret"  value="yes"><br>
+                 <input type="hidden" name="userId"  value="{{userId}}"><br>
+             </div>
+            <div class="col-sm-6" >
+                <button type="submit" class="btn btn-light">Add</button>
+            </div>
+        </div>
+    </form>
+</body>
+
